@@ -1,0 +1,261 @@
+\documentclass[12pt]{article}
+
+% Packages
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{caption}
+
+% Spacing
+\onehalfspacing
+
+% Title
+\title{Dark Markets, Bright Deaths? \\
+\large An Interrupted Time Series Analysis of the AlphaBay and Hansa Shutdowns on U.S. Overdose Mortality}
+
+\author{Working Paper}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+In July 2017, coordinated law enforcement action shut down AlphaBay and Hansa, two of the largest darknet drug marketplaces. A plausible hypothesis suggests that forcing users back to street dealers---where product quality and dosing are less reliable---could increase overdose deaths. We test this hypothesis using an interrupted time series (ITS) design with monthly U.S. overdose mortality data from 2015--2019. Contrary to expectations, we find no evidence that the takedowns accelerated overdose deaths. Instead, we observe a \textit{deceleration} in the growth rate of synthetic opioid deaths post-intervention. However, placebo tests reveal similar ``effects'' at multiple non-intervention dates, indicating the observed pattern reflects a broader inflection in the opioid epidemic rather than a specific response to the marketplace shutdowns. Our findings suggest that the causal impact of darknet enforcement on overdose mortality remains unidentified with aggregate national data.
+\end{abstract}
+
+\section{Introduction}
+
+The opioid crisis has claimed over 500,000 American lives since 1999, with synthetic opioids---primarily illicit fentanyl---driving a sharp acceleration in deaths after 2013 \citep{cdc2020}. Concurrently, darknet marketplaces emerged as significant venues for drug transactions, with platforms like Silk Road, AlphaBay, and Hansa facilitating billions of dollars in illicit trade.
+
+A controversial hypothesis in drug policy suggests that darknet markets may inadvertently provide harm reduction benefits. Unlike street dealers, darknet vendors operate under reputation systems, face customer reviews, and have incentives to provide accurate product descriptions and consistent dosing \citep{martin2017}. AlphaBay even banned fentanyl sales and offered vendor fee waivers for including naloxone with shipments. If true, shutting down these marketplaces could perversely \textit{increase} overdose deaths by forcing users to less reliable street sources.
+
+In July 2017, ``Operation Bayonet''---a coordinated effort by the FBI, DEA, Europol, and Dutch National Police---seized AlphaBay (July 4) and Hansa (July 20) in quick succession. This created a natural experiment: if the harm-reduction hypothesis holds, we should observe an acceleration in overdose deaths following the takedowns.
+
+We test this hypothesis using an interrupted time series (ITS) design with CDC mortality data. Our analysis finds no evidence supporting the hypothesis---and if anything, the opposite pattern. However, we also demonstrate that the observed trends are not uniquely attributable to the July 2017 intervention.
+
+\section{Background}
+
+\subsection{AlphaBay, Hansa, and Operation Bayonet}
+
+AlphaBay launched in 2014 and quickly became the largest darknet marketplace, surpassing Silk Road's peak trading volume by tenfold. By 2017, it had over 400,000 users and 40,000 vendors, with drugs comprising the majority of listings \citep{fbi2017}.
+
+The coordinated takedown was notable for its sophistication. Dutch police had secretly seized control of Hansa in June 2017 and operated it as a honeypot, collecting user data as vendors and buyers migrated from the collapsing AlphaBay. When both markets were shut simultaneously on July 20, the migration trap captured thousands of user identities.
+
+\subsection{Theoretical Mechanism}
+
+The hypothesis that marketplace shutdowns could increase overdose deaths rests on several mechanisms:
+
+\begin{enumerate}
+    \item \textbf{Product quality}: Darknet vendors face reputation incentives to provide consistent, accurately described products. Street dealers face no such accountability.
+    \item \textbf{Fentanyl contamination}: Street heroin is increasingly adulterated with fentanyl. Darknet markets with fentanyl bans may have provided a ``cleaner'' supply.
+    \item \textbf{Harm reduction information}: Darknet forums share dosing information, drug checking resources, and harm reduction practices.
+    \item \textbf{Supply disruption}: Sudden supply interruption may push users to unfamiliar sources or riskier consumption patterns.
+\end{enumerate}
+
+\subsection{Prior Literature}
+
+\citet{zambiasi2022} examined street drug crime following darknet shutdowns and found a short-lived (18-day) increase in marijuana-related crimes, but no effect on violent crime or other drug offenses. Research from the Australian National University found that marketplace seizures dispersed markets and temporarily reduced availability, but vendors quickly migrated to alternative platforms \citep{anu2023}.
+
+Studies have found significant correlations between darknet drug listings and local overdose rates \citep{lokala2019}, suggesting a supply-side connection. However, no prior study has directly tested whether enforcement actions causally affect overdose mortality.
+
+\section{Data}
+
+\subsection{Overdose Mortality Data}
+
+We use the CDC's Vital Statistics Rapid Release (VSRR) Provisional Drug Overdose Death Counts, accessed via the CDC WONDER database. The data provide monthly 12-month rolling death counts by drug type at the national level.
+
+We extract deaths for January 2015 through December 2019, providing 30 months pre-intervention and 30 months post-intervention. Drug categories include:
+
+\begin{itemize}
+    \item Total drug overdose deaths
+    \item Synthetic opioids excluding methadone (T40.4)---primarily fentanyl
+    \item Heroin (T40.1)
+    \item Cocaine (T40.5)
+    \item Natural and semi-synthetic opioids (T40.2)---prescription opioids
+    \item Psychostimulants with abuse potential (T43.6)---primarily methamphetamine
+\end{itemize}
+
+\subsection{Summary Statistics}
+
+Table~\ref{tab:summary} presents summary statistics for monthly death counts, split by the intervention date.
+
+\begin{table}[H]
+\centering
+\caption{Summary Statistics: Monthly Overdose Deaths (12-Month Ending)}
+\label{tab:summary}
+\begin{tabular}{lrrrr}
+\toprule
+& \multicolumn{2}{c}{Pre-Intervention} & \multicolumn{2}{c}{Post-Intervention} \\
+Outcome & Mean & SD & Mean & SD \\
+\midrule
+Total Overdose Deaths & 56,708 & 6,937 & 69,019 & 1,101 \\
+Synthetic Opioid Deaths & 13,387 & 6,105 & 30,914 & 2,605 \\
+Heroin Deaths & 13,756 & 1,741 & 15,062 & 534 \\
+Cocaine Deaths & 8,230 & 2,294 & 14,567 & 633 \\
+\midrule
+N (months) & \multicolumn{2}{c}{30} & \multicolumn{2}{c}{30} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The pre-intervention period shows high variance as deaths were rapidly increasing. The post-intervention period shows higher mean values but lower variance, suggesting the growth rate had stabilized.
+
+\section{Methods}
+
+\subsection{Interrupted Time Series Design}
+
+We employ a segmented regression ITS model:
+
+\begin{equation}
+Y_t = \beta_0 + \beta_1 \cdot \text{Time}_t + \beta_2 \cdot \text{Post}_t + \beta_3 \cdot (\text{Time}_t \times \text{Post}_t) + \epsilon_t
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $Y_t$ = monthly overdose deaths (12-month ending)
+    \item $\text{Time}_t$ = months since January 2015 (1, 2, ..., 60)
+    \item $\text{Post}_t$ = 1 if $t \geq$ July 2017, else 0
+    \item $\text{Time}_t \times \text{Post}_t$ = interaction term
+\end{itemize}
+
+The key parameters are:
+\begin{itemize}
+    \item $\beta_2$: Immediate level change at intervention
+    \item $\beta_3$: Change in trend (slope) post-intervention
+\end{itemize}
+
+If the takedowns increased overdose mortality, we would expect $\beta_2 > 0$ (immediate jump) and/or $\beta_3 > 0$ (accelerated growth).
+
+\subsection{Statistical Inference}
+
+Given strong autocorrelation in 12-month rolling data (Ljung-Box test: $p < 0.001$), we report Newey-West heteroskedasticity and autocorrelation consistent (HAC) standard errors with 6 lags.
+
+\subsection{Robustness Checks}
+
+We conduct three robustness analyses:
+
+\begin{enumerate}
+    \item \textbf{Placebo tests}: Estimate the model at 7 placebo intervention dates (every 6 months from July 2015 to January 2019, excluding July 2017).
+    \item \textbf{Window sensitivity}: Restrict the sample to $\pm$18, $\pm$12, and $\pm$9 months around the intervention.
+    \item \textbf{Seasonality controls}: Include month fixed effects.
+\end{enumerate}
+
+\section{Results}
+
+\subsection{Main Findings}
+
+Table~\ref{tab:its} presents the ITS regression results for all drug categories.
+
+\begin{table}[H]
+\centering
+\caption{Interrupted Time Series Regression Results}
+\label{tab:its}
+\begin{tabular}{lrrrr}
+\toprule
+& \multicolumn{2}{c}{Level Change ($\beta_2$)} & \multicolumn{2}{c}{Slope Change ($\beta_3$)} \\
+Outcome & Estimate & $p$-value & Estimate & $p$-value \\
+\midrule
+Total Overdose Deaths & +26,850 & $<$0.001 & $-$832 & $<$0.001 \\
+Synthetic Opioid Deaths & +14,822 & $<$0.001 & $-$387 & $<$0.001 \\
+Heroin Deaths & +6,920 & $<$0.001 & $-$253 & $<$0.001 \\
+Cocaine Deaths & +7,380 & $<$0.001 & $-$189 & $<$0.001 \\
+Natural Opioid Deaths & +7,062 & $<$0.001 & $-$230 & $<$0.001 \\
+Psychostimulant Deaths & $-$2,004 & $<$0.001 & +76 & $<$0.001 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize Notes: Newey-West HAC standard errors with 6 lags. The level change ($\beta_2$) represents the difference between the counterfactual pre-trend projection and observed post-intervention values. The slope change ($\beta_3$) represents the change in monthly growth rate.
+\end{flushleft}
+\end{table}
+
+The results are striking but \textit{opposite} to the hypothesis:
+
+\begin{itemize}
+    \item The positive $\beta_2$ values indicate that post-intervention death counts exceeded what the pre-intervention trend would predict---but this reflects the \textit{ongoing} epidemic, not an intervention effect.
+    \item The \textit{negative} $\beta_3$ values indicate that the growth rate \textit{decelerated} after July 2017. Synthetic opioid deaths were growing by 677 deaths/month pre-intervention; this slowed to 290 deaths/month post-intervention.
+\end{itemize}
+
+Figure~\ref{fig:its} visualizes the ITS model for synthetic opioid deaths.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{../figures/figure_its_synthetic_opioid_deaths.png}
+\caption{Interrupted Time Series Analysis: Synthetic Opioid Deaths. Black dots show observed monthly deaths. Blue line shows fitted pre-intervention trend; red line shows fitted post-intervention trend. Dashed blue line shows counterfactual projection of pre-intervention trend.}
+\label{fig:its}
+\end{figure}
+
+\subsection{Placebo Tests}
+
+Table~\ref{tab:placebo} presents placebo test results for synthetic opioid deaths.
+
+\begin{table}[H]
+\centering
+\caption{Placebo Tests: Synthetic Opioid Deaths}
+\label{tab:placebo}
+\begin{tabular}{lrrrr}
+\toprule
+Intervention Date & $\beta_2$ & $p$-value & $\beta_3$ & $p$-value \\
+\midrule
+July 2015 & $-$34 & 0.983 & +184 & $<$0.001 \\
+January 2016 & +1,286 & 0.575 & +162 & 0.003 \\
+July 2016 & +4,962 & 0.041 & +22 & 0.645 \\
+January 2017 & +10,509 & $<$0.001 & $-$202 & $<$0.001 \\
+\textbf{July 2017 (True)} & \textbf{+14,822} & $<$\textbf{0.001} & $-$\textbf{387} & $<$\textbf{0.001} \\
+January 2018 & +15,585 & $<$0.001 & $-$435 & $<$0.001 \\
+July 2018 & +14,355 & $<$0.001 & $-$392 & $<$0.001 \\
+January 2019 & +6,461 & 0.017 & $-$218 & $<$0.001 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The placebo tests reveal a critical limitation: significant effects appear at multiple dates around the true intervention. The pattern suggests a broader inflection point in the epidemic---occurring sometime in late 2016 through mid-2017---rather than a specific response to the July 2017 takedowns.
+
+\subsection{Robustness}
+
+Window sensitivity analyses confirm the main findings: the deceleration pattern persists across all time windows, with $\beta_3$ remaining significantly negative. Including month fixed effects does not substantively change the estimates.
+
+\section{Discussion}
+
+\subsection{Interpretation}
+
+Our analysis yields a null finding for the hypothesis that darknet marketplace shutdowns increased overdose deaths. If anything, the opposite pattern emerges: death growth rates decelerated after July 2017. However, we cannot attribute this deceleration to the intervention because:
+
+\begin{enumerate}
+    \item Placebo tests show similar effects at non-intervention dates
+    \item The inflection appears to have begun before July 2017
+    \item The 12-month rolling death counts smooth over any acute effects
+\end{enumerate}
+
+The most parsimonious interpretation is that the U.S. opioid epidemic reached an inflection point around 2016--2017, transitioning from rapid acceleration to slower (but still positive) growth. This inflection coincided with---but was likely not caused by---the Operation Bayonet takedowns.
+
+\subsection{Limitations}
+
+Several limitations constrain our analysis:
+
+\begin{itemize}
+    \item \textbf{Data structure}: The 12-month rolling counts create substantial autocorrelation and smooth over short-term effects. Monthly point-in-time counts would be preferable.
+    \item \textbf{Ecological fallacy}: National aggregate data cannot identify individual-level mechanisms. We cannot observe whether darknet users specifically shifted to street dealers.
+    \item \textbf{Concurrent factors}: Other policy changes, supply shocks, or secular trends may confound the analysis.
+    \item \textbf{Displacement}: Vendors and users may have migrated to other platforms (Dream Market, Wall Street Market) rather than to street markets.
+\end{itemize}
+
+\subsection{Policy Implications}
+
+Our null finding does not vindicate or condemn darknet enforcement. The marketplace shutdowns may have achieved other objectives (arrests, intelligence gathering, deterrence) without detectably affecting overdose mortality at the national level. The harm-reduction hypothesis remains theoretically plausible but empirically unconfirmed with available data.
+
+Future research could exploit geographic variation in darknet usage (e.g., using cryptocurrency transaction data) to construct difference-in-differences designs with greater identification power.
+
+\section{Conclusion}
+
+We find no evidence that the 2017 AlphaBay and Hansa takedowns accelerated U.S. drug overdose deaths. The observed post-intervention deceleration in death growth rates reflects a broader epidemic inflection rather than a specific enforcement effect. The causal impact of darknet marketplace enforcement on public health outcomes remains an open question requiring more granular data and research designs.
+
+\bibliographystyle{apalike}
+\bibliography{references}
+
+\end{document}
