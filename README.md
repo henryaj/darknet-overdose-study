@@ -1,5 +1,7 @@
 # Does shutting down dark web markets kill people? (2026)
 
+_[Read the full paper](https://cdn.jsdelivr.net/gh/henryaj/darknet-overdose-study/paper/main.pdf)_.
+
 In July 2017, the FBI and Europol pulled off a pretty stunning takedown of two darknet marketplaces. These marketplaces are a bit like eBay but for any illicit substance you could think of; see Gwern's post for more on them. They use Tor hidden services to evade detection - unlike normal websites, the operator's IP address is hidden by routing traffic through multiple encrypted layers.
 
 Uncovering the owners of these websites usually requires good old-fashioned detective work - Ross Ulbricht of Silk Road fame was famously caught out when the first forum post mentioning the site turned out to be from him, and he was traced through the email address he used.
