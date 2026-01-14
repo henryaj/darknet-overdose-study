@@ -1,4 +1,4 @@
-# Does shutting down dark web markets kill people?
+# Does shutting down dark web markets kill people? (2026)
 
 In July 2017, the FBI and Europol pulled off a pretty stunning takedown of two darknet marketplaces. These marketplaces are a bit like eBay but for any illicit substance you could think of; see Gwern's post for more on them. They use Tor hidden services to evade detection - unlike normal websites, the operator's IP address is hidden by routing traffic through multiple encrypted layers.
 
