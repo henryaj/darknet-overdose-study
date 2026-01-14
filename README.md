@@ -37,10 +37,10 @@ Nonetheless, the "whack-a-mole" problem persists: shut down one marketplace, use
 If you use this work, please cite:
 
 ```bibtex
-@misc{stanley2025darknet,
+@misc{stanley2026darknet,
   author = {Stanley, Henry},
   title = {Does Shutting Down Dark Web Markets Kill People?},
-  year = {2025},
+  year = {2026},
   howpublished = {\url{https://github.com/henryaj/darknet-overdose-study}},
 }
 ```
