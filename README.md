@@ -31,3 +31,16 @@ Some limitations:
 Zambiasi (2022) found street drug crimes spiked for ~18 days after darknet shutdowns, then returned to normal (which seems unlikely to me - why 18 days?).
 
 Nonetheless, the "whack-a-mole" problem persists: shut down one marketplace, users move to another. DrugHub seems to be the most popular one at the moment - the dark web is very much still alive.
+
+## Citation
+
+If you use this work, please cite:
+
+```bibtex
+@misc{stanley2025darknet,
+  author = {Stanley, Henry},
+  title = {Does Shutting Down Dark Web Markets Kill People?},
+  year = {2025},
+  howpublished = {\url{https://github.com/henryaj/darknet-overdose-study}},
+}
+```
