@@ -25,7 +25,7 @@
 \maketitle
 
 \begin{abstract}
-In July 2017, coordinated law enforcement action shut down AlphaBay and Hansa, two of the largest darknet drug marketplaces. A plausible hypothesis suggests that forcing users back to street dealers---where product quality and dosing are less reliable---could increase overdose deaths. We test this hypothesis using an interrupted time series (ITS) design with monthly U.S. overdose mortality data from 2015--2019. Contrary to expectations, we find no evidence that the takedowns accelerated overdose deaths. Instead, we observe a \textit{deceleration} in the growth rate of synthetic opioid deaths post-intervention. However, placebo tests reveal similar ``effects'' at multiple non-intervention dates, indicating the observed pattern reflects a broader inflection in the opioid epidemic rather than a specific response to the marketplace shutdowns. Our findings suggest that the causal impact of darknet enforcement on overdose mortality remains unidentified with aggregate national data.
+In July 2017, coordinated law enforcement action shut down AlphaBay and Hansa, two of the largest darknet drug marketplaces. A plausible hypothesis suggests that forcing users back to street dealers---where product quality and dosing are less reliable---could increase overdose deaths. We test this hypothesis using an interrupted time series (ITS) design with monthly U.S. overdose mortality data from 2015--2019. Contrary to expectations, we find no evidence that the takedowns accelerated overdose deaths. Instead, we observe a \textit{deceleration} in the growth rate of synthetic opioid deaths post-intervention. However, three lines of evidence suggest this pattern is not causally attributable to the takedowns: (1) placebo tests reveal similar ``effects'' at multiple non-intervention dates; (2) state-level analysis shows massive heterogeneity ($I^2 = 99\%$), with only 20\% of states showing July 2017 as the most extreme date; and (3) cryptocurrency transaction data shows darknet market activity recovered within six months, undermining the ``forced to street dealers'' mechanism. Our findings suggest the observed trends reflect broader opioid epidemic dynamics rather than enforcement effects.
 \end{abstract}
 
 \section{Introduction}
@@ -219,19 +219,85 @@ The placebo tests reveal a critical limitation: significant effects appear at mu
 
 Window sensitivity analyses confirm the main findings: the deceleration pattern persists across all time windows, with $\beta_3$ remaining significantly negative. Including month fixed effects does not substantively change the estimates.
 
+\subsection{State-Level Heterogeneity}
+
+To examine whether the national pattern is consistent across states or driven by a few large jurisdictions, we extend the ITS analysis to state-level data. Of 51 states and territories, 30 have sufficient synthetic opioid death data ($\geq$50 months of non-suppressed observations) for analysis.
+
+Table~\ref{tab:state} summarizes the state-level findings.
+
+\begin{table}[H]
+\centering
+\caption{State-Level ITS Results: Synthetic Opioid Deaths}
+\label{tab:state}
+\begin{tabular}{lr}
+\toprule
+Statistic & Value \\
+\midrule
+States analyzed & 30 \\
+Significant negative $\beta_3$ (deceleration) & 20 (67\%) \\
+Significant positive $\beta_3$ (acceleration) & 8 (27\%) \\
+Not significant & 2 (7\%) \\
+\midrule
+Weighted mean $\beta_3$ & +0.90 \\
+Simple mean $\beta_3$ & $-$10.80 \\
+\midrule
+$I^2$ heterogeneity & 99.0\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The heterogeneity is striking. While most states show deceleration (negative $\beta_3$), eight states---including Tennessee, Arizona, and Washington---show significant \textit{acceleration} in synthetic opioid deaths after July 2017. The $I^2$ statistic of 99\% indicates that nearly all variance across states reflects true heterogeneity rather than sampling error.
+
+Ohio dominates the national pattern with a slope change of $-$108 deaths/month---far larger than any other state. New York ($-$46), Maryland ($-$34), and Massachusetts ($-$31) also show large decelerations. These few states largely drive the aggregate national finding. Figure~\ref{fig:forest} visualizes the state-level heterogeneity.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{../figures/state_forest_plot_synthetic_opioid_deaths.png}
+\caption{Forest plot of state-level slope changes ($\beta_3$) for synthetic opioid deaths. Blue points indicate significant deceleration; red points indicate significant acceleration; gray points are not statistically significant. The dashed red line shows the national estimate. Note the extreme heterogeneity: Ohio shows a deceleration of $-$108 deaths/month while Tennessee shows an acceleration of +10 deaths/month.}
+\label{fig:forest}
+\end{figure}
+
+\textbf{State-level placebo tests.} To assess whether July 2017 is uniquely important at the state level, we run placebo tests at six-month intervals for each state. If the takedowns caused the observed patterns, July 2017 should consistently be the most extreme date.
+
+Results show that July 2017 is the most negative date in only 6 of 30 states (20\%). The mean z-score comparing the true effect to placebo effects is just $-$0.47---indicating July 2017 is on average only half a standard deviation more negative than arbitrary placebo dates. This suggests the state-level patterns, like the national pattern, reflect general epidemic dynamics rather than a specific response to the takedowns.
+
+\subsection{Cryptocurrency Transaction Volume}
+
+The ``forced to street dealers'' hypothesis requires that darknet market users lost access to online drug purchasing after the takedowns. We examine this assumption using cryptocurrency transaction data from Chainalysis, a blockchain analytics firm that tracks illicit Bitcoin flows.
+
+According to Chainalysis \citep{chainalysis2019}:
+
+\begin{itemize}
+    \item Darknet market Bitcoin volumes peaked at approximately \$700 million in 2017
+    \item Transaction volumes fell approximately 60\% immediately following the AlphaBay/Hansa takedowns
+    \item However, volumes began recovering within months as users migrated to alternative markets (Dream Market, Wall Street Market, Hydra)
+    \item By early 2018---approximately six months post-takedown---transaction volumes had largely recovered, reaching \$603 million for the full year
+\end{itemize}
+
+Figure~\ref{fig:crypto} plots estimated darknet market volumes alongside synthetic opioid deaths.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{../figures/crypto_overdose_comparison.png}
+\caption{Darknet market Bitcoin transaction volumes (blue, left axis) versus synthetic opioid deaths (red, right axis). Shaded region indicates the post-takedown period. DNM volumes dropped sharply but recovered within approximately six months.}
+\label{fig:crypto}
+\end{figure}
+
+The rapid market recovery has important implications. If darknet users regained access to online drug markets within six months, the window during which they might have been ``forced'' to street dealers was brief. This weakens the theoretical mechanism linking the takedowns to overdose mortality. Any acute effect would need to have occurred in a narrow window (July 2017--early 2018) and be large enough to detectably shift national mortality trends---an increasingly implausible scenario given the small share of drug users who purchase via darknet markets.
+
 \section{Discussion}
 
 \subsection{Interpretation}
 
-Our analysis yields a null finding for the hypothesis that darknet marketplace shutdowns increased overdose deaths. If anything, the opposite pattern emerges: death growth rates decelerated after July 2017. However, we cannot attribute this deceleration to the intervention because:
+Our analysis yields a null finding for the hypothesis that darknet marketplace shutdowns increased overdose deaths. If anything, the opposite pattern emerges: death growth rates decelerated after July 2017. However, we present three independent lines of evidence that this deceleration is not causally attributable to the intervention:
 
 \begin{enumerate}
-    \item Placebo tests show similar effects at non-intervention dates
-    \item The inflection appears to have begun before July 2017
-    \item The 12-month rolling death counts smooth over any acute effects
+    \item \textbf{National placebo tests}: Similar deceleration patterns appear at multiple non-intervention dates, suggesting the inflection reflects broader epidemic dynamics.
+    \item \textbf{State-level heterogeneity}: The pattern is not uniform across states ($I^2 = 99\%$). Eight states show acceleration rather than deceleration, and state-level placebo tests show July 2017 is the most extreme date in only 20\% of states.
+    \item \textbf{Rapid market recovery}: Cryptocurrency data shows darknet market activity recovered within six months, meaning the window during which users lacked online alternatives was brief.
 \end{enumerate}
 
-The most parsimonious interpretation is that the U.S. opioid epidemic reached an inflection point around 2016--2017, transitioning from rapid acceleration to slower (but still positive) growth. This inflection coincided with---but was likely not caused by---the Operation Bayonet takedowns.
+The most parsimonious interpretation is that the U.S. opioid epidemic reached an inflection point around 2016--2017, transitioning from rapid acceleration to slower (but still positive) growth. This inflection coincided with---but was likely not caused by---the Operation Bayonet takedowns. The national pattern is largely driven by a few states (Ohio, New York, Maryland) that experienced dramatic trend reversals for reasons that may be unrelated to darknet enforcement.
 
 \subsection{Limitations}
 
@@ -252,7 +318,15 @@ Future research could exploit geographic variation in darknet usage (e.g., using
 
 \section{Conclusion}
 
-We find no evidence that the 2017 AlphaBay and Hansa takedowns accelerated U.S. drug overdose deaths. The observed post-intervention deceleration in death growth rates reflects a broader epidemic inflection rather than a specific enforcement effect. The causal impact of darknet marketplace enforcement on public health outcomes remains an open question requiring more granular data and research designs.
+We find no evidence that the 2017 AlphaBay and Hansa takedowns accelerated U.S. drug overdose deaths. The observed post-intervention deceleration in death growth rates reflects a broader epidemic inflection rather than a specific enforcement effect. Three independent analyses support this conclusion:
+
+\begin{itemize}
+    \item National and state-level placebo tests show July 2017 is not a uniquely important date
+    \item State-level analysis reveals massive heterogeneity, with eight states showing acceleration rather than deceleration
+    \item Cryptocurrency data shows darknet markets recovered within six months, limiting the window for any ``forced to street dealers'' mechanism
+\end{itemize}
+
+The causal impact of darknet marketplace enforcement on public health outcomes remains an open question. Our null finding does not imply that darknet markets provide harm reduction benefits---only that the available evidence cannot detect such effects at the national level. Future research could exploit geographic variation in darknet usage patterns, using cryptocurrency transaction data or postal seizure records, to construct research designs with greater identification power.
 
 \bibliographystyle{apalike}
 \bibliography{references}
