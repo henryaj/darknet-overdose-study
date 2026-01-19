@@ -18,19 +18,54 @@ The findings were surprising:
 
 - Deaths actually decelerated after the takedown, which is the opposite of what I and harm reduction advocates would have predicted
 - Synthetic opioid deaths grew 677 per month pre-takedown and 291 per month post-takedown, a 57% reduction in the growth rate
-- Causation is murky: running "placebo tests" to check whether the same thing happened at different dates found similar decelerations in Jan 2017, Jan 2018, suggesting a broader inflection point at the time. The takedowns may have contributed or just coincided 
+- Causation is murky: running "placebo tests" to check whether the same thing happened at different dates found similar decelerations in Jan 2017, Jan 2018, suggesting a broader inflection point at the time. The takedowns may have contributed or just coincided
 
 Basically, [Betteridge's law](https://en.wikipedia.org/wiki/Betteridge%27s_law_of_headlines) applies.
 
-Some limitations:
+## Digging deeper
 
-- National aggregate data is a blunt instrument - we can't stratify by parts of the US that have high or low darknet marketplace usage
-- Using 12 month rolling averages smooths out short-term spikes
-- Vendors may have simply migrated to other markets more quickly than I'm imagining
+The national analysis left some questions open. Could this just be a few big states driving the pattern? And did users actually get forced to street dealers, or did they just find new markets?
 
-Zambiasi (2022) found street drug crimes spiked for ~18 days after darknet shutdowns, then returned to normal (which seems unlikely to me - why 18 days?).
+### State-level analysis
 
-Nonetheless, the "whack-a-mole" problem persists: shut down one marketplace, users move to another. DrugHub seems to be the most popular one at the moment - the dark web is very much still alive.
+I extended the analysis to look at individual states. Of the 30 states with enough data, I found:
+
+- Massive heterogeneity across states (I² = 99%, which is about as high as it gets)
+- 20 states showed deceleration, but 8 states - including Tennessee, Arizona, and Washington - actually showed *acceleration* in fentanyl deaths after July 2017
+- Ohio alone accounted for a huge chunk of the national pattern (-108 deaths/month), with New York and Maryland also showing big decelerations
+- The national "effect" is largely driven by idiosyncratic factors in a few states, not a uniform response to the takedowns
+
+Even more damning: running placebo tests at the state level, July 2017 was the most extreme date in only 20% of states. For most states, you'd get equally dramatic "effects" at random other dates. This suggests we're seeing general epidemic dynamics, not anything specific to the takedowns.
+
+![Forest plot showing state-level variation](figures/state_forest_plot_synthetic_opioid_deaths.png)
+
+### Did users actually switch to street dealers?
+
+The whole "forced to street dealers" hypothesis assumes users lost access to online markets for a meaningful period. But did they?
+
+I looked at Chainalysis data on Bitcoin flows to darknet markets. The picture is pretty clear:
+
+- Transaction volumes dropped ~60% immediately after the takedowns
+- But they recovered within about 6 months as users migrated to Dream Market, Wall Street Market, and eventually Hydra
+- By early 2018, volumes were back to pre-takedown levels
+
+So the window during which users might have been "forced" to street dealers was brief - maybe 6 months at most. And that's assuming everyone who used darknet markets switched to street dealers rather than just... not buying drugs for a bit, or finding the new markets faster.
+
+![DNM volumes vs overdose deaths](figures/crypto_overdose_comparison.png)
+
+## Conclusions
+
+Three independent lines of evidence point the same way:
+
+1. National placebo tests show July 2017 isn't uniquely important
+2. State-level analysis shows the pattern isn't uniform (and state placebo tests confirm July 2017 isn't special)
+3. Crypto data shows markets recovered within 6 months, limiting any "forced to street" mechanism
+
+The most boring interpretation is probably correct: the opioid epidemic hit an inflection point around 2016-2017, transitioning from explosive growth to slower (but still positive) growth. This happened to coincide with Operation Bayonet but wasn't caused by it.
+
+This doesn't prove darknet markets provide harm reduction benefits - just that we can't detect any effect of the takedowns on overdose deaths with this data. The "whack-a-mole" problem persists: shut down one marketplace, users move to another. DrugHub seems to be the most popular one at the moment - the dark web is very much still alive.
+
+Zambiasi (2022) found street drug crimes spiked for ~18 days after darknet shutdowns, then returned to normal (which seems unlikely to me - why 18 days? But consistent with fast market migration).
 
 ## Citation
 
