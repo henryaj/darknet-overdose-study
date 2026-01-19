@@ -1,0 +1,23 @@
+# DNM Cryptocurrency Transaction Volumes (Estimated)
+# Source: Chainalysis Crypto Crime Reports (2019, 2020)
+# Note: Monthly values estimated from annual totals and reported events.
+#       2017 annual: $707M, 2018 annual: $603M
+#       July 2017: 60% drop after AlphaBay/Hansa takedowns
+#       Early 2018: ~$1M/day, Late 2018: ~$2M/day
+# These are ESTIMATES for visualization purposes, not precise measurements.
+date,dnm_volume_millions_usd,source,notes
+2016-01-01,35,chainalysis_estimated,pre-peak growth period
+2016-04-01,40,chainalysis_estimated,pre-peak growth period
+2016-07-01,45,chainalysis_estimated,pre-peak growth period
+2016-10-01,50,chainalysis_estimated,pre-peak growth period
+2017-01-01,55,chainalysis_estimated,approaching 2017 peak
+2017-04-01,65,chainalysis_estimated,approaching 2017 peak
+2017-06-01,70,chainalysis_reported,peak before takedowns ($707M annual)
+2017-07-01,28,chainalysis_reported,60% drop after AlphaBay/Hansa
+2017-08-01,30,chainalysis_estimated,initial recovery
+2017-10-01,35,chainalysis_estimated,gradual recovery
+2018-01-01,30,chainalysis_reported,~$1M/day reported
+2018-04-01,40,chainalysis_estimated,recovery continues
+2018-07-01,50,chainalysis_estimated,approaching pre-takedown levels
+2018-10-01,55,chainalysis_estimated,near full recovery
+2018-12-01,60,chainalysis_reported,~$2M/day reported (doubled from Jan)
