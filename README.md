@@ -37,8 +37,6 @@ I extended the analysis to look at individual states. Of the 30 states with enou
 
 Even more damning: running placebo tests at the state level, July 2017 was the most extreme date in only 20% of states. For most states, you'd get equally dramatic "effects" at random other dates. This suggests we're seeing general epidemic dynamics, not anything specific to the takedowns.
 
-![Forest plot showing state-level variation](figures/state_forest_plot_synthetic_opioid_deaths.png)
-
 ### Did users actually switch to street dealers?
 
 The whole "forced to street dealers" hypothesis assumes users lost access to online markets for a meaningful period. But did they?
