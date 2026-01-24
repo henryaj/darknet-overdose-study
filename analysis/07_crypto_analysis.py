@@ -70,7 +70,8 @@ def plot_crypto_overdose_comparison(crypto_df, overdose_df):
 
     # Intervention line
     intervention_date = pd.Timestamp('2017-07-01')
-    ax1.axvline(x=intervention_date, color='black', linestyle='--', linewidth=1.5)
+    ax1.axvline(x=intervention_date, color='black', linestyle='--', linewidth=1.5,
+                label='July 2017 takedowns')
 
     # Annotations
     ax1.annotate('AlphaBay/Hansa\nTakedown',

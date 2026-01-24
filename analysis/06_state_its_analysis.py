@@ -470,27 +470,20 @@ def main():
     print(f"Data shape: {df.shape}")
     print(f"States: {df['state'].nunique()}")
 
-    # Load national results for comparison
-    national_results_file = DATA_DIR / "its_results.csv"
-    national_beta3 = None
-    if national_results_file.exists():
-        national_df = pd.read_csv(national_results_file)
-        synth_row = national_df[national_df['outcome'].str.contains('Synthetic', case=False)]
-        if len(synth_row) > 0:
-            national_beta3 = synth_row['beta3_slope'].iloc[0]
-            print(f"National synthetic opioid beta3: {national_beta3:+.1f}")
+    # Note: National ITS uses 12-month rolling totals, state analysis uses monthly counts
+    # These are different scales, so we don't plot the national estimate on the state forest plot
 
     # Run analysis for synthetic opioid deaths (primary outcome)
     results_synth = run_all_states(df, 'synthetic_opioid_deaths', 'Synthetic Opioid Deaths')
 
     if len(results_synth) > 0:
-        # Summary statistics
-        summary = compute_summary_stats(results_synth, national_beta3)
+        # Summary statistics (no national comparison due to scale mismatch)
+        summary = compute_summary_stats(results_synth)
         print_summary(summary)
 
-        # Visualizations
-        plot_forest(results_synth, 'Synthetic Opioid Deaths', national_beta3)
-        plot_histogram(results_synth, 'Synthetic Opioid Deaths', national_beta3)
+        # Visualizations (no national line - different scale)
+        plot_forest(results_synth, 'Synthetic Opioid Deaths')
+        plot_histogram(results_synth, 'Synthetic Opioid Deaths')
 
         # Save results
         results_synth.to_csv(RESULTS_FILE, index=False)

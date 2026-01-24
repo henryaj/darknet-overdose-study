@@ -10,6 +10,7 @@
 \usepackage{float}
 \usepackage{setspace}
 \usepackage{caption}
+\usepackage[most]{tcolorbox}
 
 % Spacing
 \onehalfspacing
@@ -25,7 +26,7 @@
 \maketitle
 
 \begin{abstract}
-In July 2017, coordinated law enforcement action shut down AlphaBay and Hansa, two of the largest darknet drug marketplaces. A plausible hypothesis suggests that forcing users back to street dealers---where product quality and dosing are less reliable---could increase overdose deaths. We test this hypothesis using an interrupted time series (ITS) design with monthly U.S. overdose mortality data from 2015--2019. Contrary to expectations, we find no evidence that the takedowns accelerated overdose deaths. Instead, we observe a \textit{deceleration} in the growth rate of synthetic opioid deaths post-intervention. However, three lines of evidence suggest this pattern is not causally attributable to the takedowns: (1) placebo tests reveal similar ``effects'' at multiple non-intervention dates; (2) state-level analysis shows massive heterogeneity ($I^2 = 99\%$), with only 20\% of states showing July 2017 as the most extreme date; and (3) cryptocurrency transaction data shows darknet market activity recovered within six months, undermining the ``forced to street dealers'' mechanism. Our findings suggest the observed trends reflect broader opioid epidemic dynamics rather than enforcement effects.
+In July 2017, coordinated law enforcement action shut down AlphaBay and Hansa, two of the largest darknet drug marketplaces. Cryptocurrency data confirms the takedowns had immediate impact: transaction volumes to darknet markets fell approximately 60\%. A plausible hypothesis suggests that forcing users back to street dealers---where product quality and dosing are less reliable---could increase overdose deaths. We test this hypothesis using an interrupted time series (ITS) design with monthly U.S. overdose mortality data from 2015--2019. Contrary to expectations, we find no evidence that the takedowns accelerated overdose deaths. Instead, we observe a \textit{deceleration} in the growth rate of synthetic opioid deaths post-intervention. However, three lines of evidence suggest this pattern is not causally attributable to the takedowns: (1) placebo tests reveal similar ``effects'' at multiple non-intervention dates; (2) state-level analysis shows massive heterogeneity ($I^2 = 99\%$), with only 20\% of states showing July 2017 as the most extreme date; and (3) darknet market activity recovered within six months, limiting the window during which users lacked online alternatives. Our findings suggest the observed trends reflect broader opioid epidemic dynamics rather than enforcement effects.
 \end{abstract}
 
 \section{Introduction}
@@ -123,8 +124,10 @@ where:
     \item $\text{Time}_t \times \text{Post}_t$ = interaction term
 \end{itemize}
 
-The key parameters are:
+The parameters are:
 \begin{itemize}
+    \item $\beta_0$: Intercept (baseline level at $t=0$)
+    \item $\beta_1$: Pre-intervention trend (monthly change before July 2017)
     \item $\beta_2$: Immediate level change at intervention
     \item $\beta_3$: Change in trend (slope) post-intervention
 \end{itemize}
@@ -253,7 +256,7 @@ Ohio dominates the national pattern with a slope change of $-$108 deaths/month--
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{../figures/state_forest_plot_synthetic_opioid_deaths.png}
-\caption{Forest plot of state-level slope changes ($\beta_3$) for synthetic opioid deaths. Blue points indicate significant deceleration; red points indicate significant acceleration; gray points are not statistically significant. The dashed red line shows the national estimate. Note the extreme heterogeneity: Ohio shows a deceleration of $-$108 deaths/month while Tennessee shows an acceleration of +10 deaths/month.}
+\caption{Forest plot of state-level slope changes ($\beta_3$) for synthetic opioid deaths. Blue points indicate significant deceleration; red points indicate significant acceleration; gray points are not statistically significant. Note the extreme heterogeneity: Ohio shows a deceleration of $-$108 deaths/month while Tennessee shows an acceleration of +10 deaths/month.}
 \label{fig:forest}
 \end{figure}
 
@@ -264,6 +267,29 @@ Results show that July 2017 is the most negative date in only 6 of 30 states (20
 \subsection{Cryptocurrency Transaction Volume}
 
 The ``forced to street dealers'' hypothesis requires that darknet market users lost access to online drug purchasing after the takedowns. We examine this assumption using cryptocurrency transaction data from Chainalysis, a blockchain analytics firm that tracks illicit Bitcoin flows.
+
+\vspace{1em}
+\begin{tcolorbox}[
+    colback=gray!5,
+    colframe=gray!50,
+    title={\textbf{Box 1: How Chainalysis Measures Darknet Market Activity}},
+    fonttitle=\small,
+    fontupper=\small
+]
+Chainalysis tracks cryptocurrency flows to darknet markets through several methods:
+
+\begin{enumerate}
+    \item \textbf{Wallet identification}: Addresses belonging to known darknet markets are identified through clustering heuristics and open-source intelligence (OSINT)---scraping forums, Telegram channels, and other online sources for deposit addresses.
+
+    \item \textbf{Transaction tracking}: Once DNM addresses are identified, all Bitcoin transactions to and from these addresses are tracked on the public blockchain.
+
+    \item \textbf{USD conversion}: Bitcoin values are converted to USD using prices at the time of each transaction.
+\end{enumerate}
+
+\textbf{Limitations}: (1) Only tracks Bitcoin, not privacy-focused cryptocurrencies like Monero increasingly used on DNMs; (2) only captures ``identified'' markets---new or unknown markets may be missed; (3) figures include all flows (deposits, withdrawals, escrow movements), not just completed sales; (4) methodology for initial wallet identification is proprietary and not fully transparent.
+
+Despite these limitations, Chainalysis data provides the best available estimate of aggregate darknet market activity over time.
+\end{tcolorbox}
 
 According to Chainalysis \citep{chainalysis2019}:
 
